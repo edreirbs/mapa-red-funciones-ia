@@ -13,7 +13,7 @@ Mapa interactivo de la taxonomía funcional de la IA (categorías → capacidade
 - **Sincronización:** si alguien más edita mientras tienes el mapa abierto, verás sus cambios en unos 12 segundos.
 - **⤓ imagen PNG:** descarga la versión actual del mapa como imagen en cualquier momento.
 - **⤓ respaldo HTML:** descarga una copia autónoma del mapa con el estado actual incrustado (útil como respaldo offline).
-- **↺ restablecer:** ⚠️ regresa el mapa a su versión original **para todos** (pide confirmación).
+- **Contador automático:** la cuenta de categorías · capacidades · funciones (esquina inferior derecha) se recalcula sola al agregar o borrar ramas; no es editable.
 
 ## Arquitectura
 
@@ -22,7 +22,7 @@ Mapa interactivo de la taxonomía funcional de la IA (categorías → capacidade
 | Página (este repo, `index.html`) | GitHub Pages |
 | Estado compartido + historial de versiones | Supabase (proyecto `mapa-red-funciones-ia`, ref `lapdnydlalrbpdaphfpz`) |
 
-El estado vive en la tabla `map_state` (una fila) y cada guardado registra una copia en `map_versions` (se conservan las últimas 50). La escritura pasa por la función RPC `save_map`; las tablas solo permiten lectura anónima.
+El estado vive en la tabla `map_state` (una fila) y cada guardado registra una copia en `map_versions` (se conservan las últimas 200). La escritura pasa por la función RPC `save_map`; las tablas solo permiten lectura anónima.
 
 ## Restaurar una versión anterior
 
