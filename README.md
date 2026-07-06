@@ -9,6 +9,7 @@ Mapa interactivo de la taxonomía funcional de la IA (categorías → capacidade
 - **Ver:** abre el enlace. Siempre carga la última versión guardada.
 - **Editar:** clic en cualquier texto para renombrarlo; arrastra los nodos para moverlos; selecciona un nodo y usa «+» para agregar categorías/capacidades/funciones o «eliminar» para quitarlas.
 - **Guardado automático:** cada cambio se guarda solo (≈1 segundo después de editar) en la base de datos compartida. No hay botón de guardar.
+- **Deshacer / rehacer:** `Ctrl+Z` (o `Cmd+Z` en Mac) deshace tu último cambio; `Ctrl+Y` o `Ctrl+Shift+Z` lo rehace. El historial de deshacer es local a tu pestaña (cubre lo que tú hiciste en esta sesión) y lo que deshagas también se guarda para todos.
 - **Sincronización:** si alguien más edita mientras tienes el mapa abierto, verás sus cambios en unos 12 segundos.
 - **⤓ imagen PNG:** descarga la versión actual del mapa como imagen en cualquier momento.
 - **⤓ respaldo HTML:** descarga una copia autónoma del mapa con el estado actual incrustado (útil como respaldo offline).
