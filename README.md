@@ -15,6 +15,7 @@ Mapa interactivo de la taxonomía funcional de la IA (categorías → capacidade
 - **⤓ respaldo HTML:** descarga una copia autónoma del mapa con el estado actual incrustado (útil como respaldo offline).
 - **Contador automático:** la cuenta de categorías · capacidades · funciones (esquina inferior derecha) se recalcula sola al agregar o borrar ramas; no es editable.
 - **Zoom y paneo:** rueda del mouse (o pinch) hace zoom hacia el cursor; arrastra el fondo para desplazarte; controles − / % / + / «ajustar» en la esquina inferior derecha. El zoom es local a tu pantalla, no se comparte.
+- **🔍 Buscar:** la barra de la esquina superior derecha (sustituye a la antigua leyenda de puntos) resalta en neón los nodos que coinciden con lo que escribes — sin distinguir mayúsculas ni acentos, con varias palabras en cualquier orden. La leyenda de puntos sigue apareciendo en el PNG exportado.
 - **✨ reacomodar:** limpia los desplazamientos manuales de todos los nodos y rebalancea las ramas entre ambos lados para que el mapa quede simétrico y legible (el acomodo base es algorítmico). Afecta a todos; se puede revertir con Ctrl+Z.
 
 ## Arquitectura
