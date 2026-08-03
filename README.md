@@ -45,7 +45,7 @@ update map_state
 
 ## Mantenimiento
 
-- El plan gratuito de Supabase pausa proyectos tras ~1 semana sin actividad. El workflow [keepalive.yml](.github/workflows/keepalive.yml) hace un ping dos veces por semana para evitarlo. GitHub desactiva los crons si el repo no tiene actividad por 60 días — si llega un correo de "scheduled workflow disabled", reactívalo desde la pestaña Actions.
+- El plan gratuito de Supabase pausa proyectos tras ~1 semana sin actividad. El workflow [keepalive.yml](.github/workflows/keepalive.yml) hace **una escritura diaria** en la tabla `heartbeat` (vía la RPC `keepalive_ping`) — actividad real de base de datos, no solo lecturas — con reintentos. Además, si el repo lleva 25+ días sin commits, el propio workflow hace un commit de latido para que GitHub no desactive el cron (los desactiva tras 60 días de repos inactivos). Si aun así llegara a pausarse, se reactiva en un clic desde el dashboard de Supabase sin pérdida de datos.
 - Si el mapa aparece vacío o sin poder guardar, revisa que el proyecto de Supabase esté activo en el dashboard.
 
 ## Notas técnicas

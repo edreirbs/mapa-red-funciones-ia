@@ -1,14 +1,46 @@
 name: keepalive-supabase
 on:
   schedule:
-    - cron: '17 12 * * 1,4'  # lunes y jueves 12:17 UTC
+    - cron: '23 11 * * *'  # diario, 11:23 UTC
   workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   ping:
     runs-on: ubuntu-latest
     steps:
-      - name: Ping estado del mapa (evita pausa por inactividad del plan gratuito)
+      - uses: actions/checkout@v4
+
+      - name: Escribir latido en Supabase (actividad real de base de datos)
+        run: |
+          for i in 1 2 3; do
+            code=$(curl -s -o /tmp/r.json -w "%{http_code}" -X POST \
+              "https://lapdnydlalrbpdaphfpz.supabase.co/rest/v1/rpc/keepalive_ping" \
+              -H "apikey: sb_publishable_iWf-dT48aN8OMGBGS2qBGQ_92LJnopJ" \
+              -H "Content-Type: application/json" -d '{}')
+            echo "intento $i: HTTP $code $(cat /tmp/r.json)"
+            if [ "$code" = "200" ]; then exit 0; fi
+            sleep 30
+          done
+          echo "::error::el latido a Supabase falló tras 3 intentos"
+          exit 1
+
+      - name: Lectura adicional del estado del mapa
         run: |
           curl -sf "https://lapdnydlalrbpdaphfpz.supabase.co/rest/v1/map_state?id=eq.1&select=updated_at" \
             -H "apikey: sb_publishable_iWf-dT48aN8OMGBGS2qBGQ_92LJnopJ"
+
+      - name: Mantener el cron de Actions activo (commit si el repo lleva 25+ días quieto)
+        run: |
+          if [ -z "$(git log -1 --since='25 days ago' --oneline)" ]; then
+            date -u +"%Y-%m-%dT%H:%M:%SZ" > .keepalive
+            git config user.name "keepalive-bot"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add .keepalive
+            git commit -m "chore: latido para mantener activo el cron de Actions"
+            git push
+          else
+            echo "repo con actividad reciente; sin commit"
+          fi
